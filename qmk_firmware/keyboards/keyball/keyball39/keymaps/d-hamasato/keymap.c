@@ -62,6 +62,10 @@ LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                      
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch(get_highest_layer(remove_auto_mouse_layer(state, true))) {
+      case 0:
+          set_auto_mouse_enable(true);
+          keyball_set_scroll_mode(false);
+          break;
       case 3:
           // Auto enable scroll mode when the highest layer is 3
           // remove_auto_mouse_target must be called to adjust state *before* setting enable
@@ -70,7 +74,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
           keyball_set_scroll_mode(true);
           break;
       default:
-          set_auto_mouse_enable(true);
+          set_auto_mouse_enable(false);
           keyball_set_scroll_mode(false);
           break;
     }
