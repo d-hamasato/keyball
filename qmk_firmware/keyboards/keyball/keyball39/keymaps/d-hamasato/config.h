@@ -35,8 +35,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAP_CODE_DELAY 5
 
-// https://github.com/qmk/qmk_firmware/blob/master/docs/feature_pointing_device.md#automatic-mouse-layer-idpointing-device-auto-mouse
+// https://docs.qmk.fm/#/feature_pointing_device?id=pointing-device-auto-mouse
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 4
 
-#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+// https://docs.qmk.fm/#/tap_hold?id=tap-hold-configuration-options
+//   tap, hold の調整
+#define IGNORE_MOD_TAP_INTERRUPT
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
