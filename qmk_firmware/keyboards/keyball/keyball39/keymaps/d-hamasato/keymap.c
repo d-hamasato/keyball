@@ -50,12 +50,31 @@ LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                      
     RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
     QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , KBC_RST  , QK_BOOT
   ),
+
+  [4] = LAYOUT_universal( // AUTO_MOUSE_DEFAULT_LAYER
+    _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
+    _______  , _______  , _______  , _______  , _______  ,                            _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
+    _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , _______  , _______
+  ),
 };
 // clang-format on
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 3
-    keyball_set_scroll_mode(get_highest_layer(state) == 3);
+    switch(get_highest_layer(remove_auto_mouse_layer(state, true))) {
+      case 3:
+          // Auto enable scroll mode when the highest layer is 3
+          // remove_auto_mouse_target must be called to adjust state *before* setting enable
+          state = remove_auto_mouse_layer(state, false);
+          set_auto_mouse_enable(false);
+          keyball_set_scroll_mode(true);
+          break;
+      default:
+          set_auto_mouse_enable(true);
+          keyball_set_scroll_mode(false);
+          break;
+    }
+
     return state;
 }
 
