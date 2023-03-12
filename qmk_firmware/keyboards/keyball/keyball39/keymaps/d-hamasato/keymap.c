@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
 LCTL_T(KC_A) , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , RCTL_T(KC_SCLN),
 LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , RSFT_T(KC_SLSH),
-    KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),LT(1,KC_LNG2),GUI_T(KC_SPC), ALT_T(KC_ENT),LT(2,KC_LNG1), _______  , _______  ,_______, KC_ESC
+    KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),MO(1),GUI_T(KC_SPC),      ALT_T(KC_ENT),MO(2), _______  , _______  , _______  , KC_ESC
   ),
 
   [1] = LAYOUT_universal(
@@ -77,6 +77,56 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
     return state;
 }
+
+
+static bool lower_pressed = false;
+static bool raise_pressed = false;
+static uint16_t lower_pressed_time = 0;
+static uint16_t raise_pressed_time = 0;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // シングルタップで入力言語切り替えになるようにMO()をオーバーライド
+    case MO(1):
+      if (record->event.pressed) {
+        lower_pressed = true;
+        lower_pressed_time = record->event.time;
+        layer_on(1);
+      } else {
+        layer_off(1);
+        if (lower_pressed && (TIMER_DIFF_16(record->event.time, lower_pressed_time) < TAPPING_TERM)) {
+          register_code(KC_LNG2);
+          unregister_code(KC_LNG2);
+        }
+        lower_pressed = false;
+      }
+      return false;
+      break;
+    case MO(2):
+      if (record->event.pressed) {
+        raise_pressed = true;
+        raise_pressed_time = record->event.time;
+        layer_on(2);
+      } else {
+        layer_off(2);
+        if (raise_pressed && (TIMER_DIFF_16(record->event.time, raise_pressed_time) < TAPPING_TERM)) {
+          register_code(KC_LNG1);
+          unregister_code(KC_LNG1);
+        }
+        raise_pressed = false;
+      }
+      return false;
+      break;
+    default:
+      if (record->event.pressed) {
+        lower_pressed = false;
+        raise_pressed = false;
+      }
+      break;
+  }
+  return true;
+}
+
 
 #ifdef OLED_ENABLE
 
