@@ -105,6 +105,55 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 
 
+static bool lower_pressed = false;
+static bool raise_pressed = false;
+static uint16_t lower_pressed_time = 0;
+static uint16_t raise_pressed_time = 0;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // HOLD_ON_OTHER_KEY_PRESSオプションと LT()の組み合わせだとたまに意図しない入力になったので、シングルタップで入力言語切り替えになるようMO()をオーバーライド
+    case MO(1):
+      if (record->event.pressed) {
+        lower_pressed = true;
+        lower_pressed_time = record->event.time;
+        layer_on(1);
+      } else {
+        layer_off(1);
+        if (lower_pressed && (TIMER_DIFF_16(record->event.time, lower_pressed_time) < TAPPING_TERM)) {
+          register_code(KC_LNG2);
+          unregister_code(KC_LNG2);
+        }
+        lower_pressed = false;
+      }
+      return false;
+      break;
+    case MO(2):
+      if (record->event.pressed) {
+        raise_pressed = true;
+        raise_pressed_time = record->event.time;
+        layer_on(2);
+      } else {
+        layer_off(2);
+        if (raise_pressed && (TIMER_DIFF_16(record->event.time, raise_pressed_time) < TAPPING_TERM)) {
+          register_code(KC_LNG1);
+          unregister_code(KC_LNG1);
+        }
+        raise_pressed = false;
+      }
+      return false;
+      break;
+    default:
+      if (record->event.pressed) {
+        lower_pressed = false;
+        raise_pressed = false;
+      }
+      break;
+  }
+  return true;
+}
+
+
 #ifdef OLED_ENABLE
 
 #    include "lib/oledkit/oledkit.h"
