@@ -28,12 +28,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 LCTL_T(KC_A) , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , RCTL_T(KC_SCLN),
 LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , RSFT_T(KC_SLSH),
     KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),MO(1),GUI_T(KC_SPC),      ALT_T(KC_ENT),MO(2), _______  , _______  , _______  , KC_ESC
+    // KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),LT(1,KC_LNG2),GUI_T(KC_SPC), ALT_T(KC_ENT),LT(2,KC_LNG1), _______  , _______  , _______  , KC_ESC
   ),
 
   [1] = LAYOUT_universal(
     KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                            KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,
-    _______  , _______  , _______  , KC_BTN1  , KC_BTN2  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , _______  ,
-    _______  , _______  , _______  , _______  , _______  ,                            KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , _______  ,
+    KC_TAB   , _______  , _______  , _______  , _______  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , _______  ,
+    KC_LSFT  , _______  , _______  , _______  , _______  ,                            KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_RSFT  ,
     _______  , _______  , _______  , _______  , _______  , KC_SPC   ,       KC_ENT ,  MO(5)    , _______  , _______  , _______  , _______
   ),
 
@@ -91,16 +92,16 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
+    switch (keycode) {
         case LCTL_T(KC_A):
         case LSFT_T(KC_Z):
             // Do not force the mod-tap key press to be handled as a modifier
             // if any other key was pressed while the mod-tap key is held down.
-      return false;
-    default:
+            return false;
+        default:
             // Force the dual-role key press to be handled as a modifier if any
             // other key was pressed while the mod-tap key is held down.
-  return true;
+            return true;
     }
 }
 
