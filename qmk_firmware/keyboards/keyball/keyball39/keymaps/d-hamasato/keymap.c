@@ -105,6 +105,16 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LCTL_T(KC_A):
+        case LSFT_T(KC_Z):
+            return 120;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 
 static bool lower_pressed = false;
 static bool raise_pressed = false;
