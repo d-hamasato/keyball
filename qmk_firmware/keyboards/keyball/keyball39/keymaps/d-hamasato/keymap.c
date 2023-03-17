@@ -54,7 +54,7 @@ LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                      
 
   [4] = LAYOUT_universal( // AUTO_MOUSE_DEFAULT_LAYER
     _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  ,                        LGUI(KC_LEFT), KC_BTN1  , MO(3)    , KC_BTN2  , LGUI(KC_RIGHT),
+    _______  , _______  , _______  , _______  , _______  ,                            KC_BTN4  , KC_BTN1  ,LT(3,KC_BTN3), KC_BTN2  , KC_BTN5  ,
     _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
     _______  , _______  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , _______  , _______
   ),
@@ -121,9 +121,6 @@ static bool raise_pressed = false;
 static uint16_t lower_pressed_time = 0;
 static uint16_t raise_pressed_time = 0;
 
-static bool scroll_pressed = false;
-static uint16_t scroll_pressed_time = 0;
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // HOLD_ON_OTHER_KEY_PRESSオプションと LT()の組み合わせだとたまに意図しない入力になったので、シングルタップで入力言語切り替えになるようMO()をオーバーライド
@@ -135,8 +132,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         layer_off(1);
         if (lower_pressed && (TIMER_DIFF_16(record->event.time, lower_pressed_time) < TAPPING_TERM)) {
-          register_code(KC_LNG2);
-          unregister_code(KC_LNG2);
+          tap_code(KC_LNG2);
         }
         lower_pressed = false;
       }
@@ -150,24 +146,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         layer_off(2);
         if (raise_pressed && (TIMER_DIFF_16(record->event.time, raise_pressed_time) < TAPPING_TERM)) {
-          register_code(KC_LNG1);
-          unregister_code(KC_LNG1);
+          tap_code(KC_LNG1);
         }
         raise_pressed = false;
-      }
-      return false;
-      break;
-    case MO(3):  // AUTO_MOUSE_DEFAULT_LAYER に設定 holdでスクロールモード、tapでクリックしたリンクを新規タブで開く
-      if (record->event.pressed) {
-        scroll_pressed = true;
-        scroll_pressed_time = record->event.time;
-        layer_on(3);
-      } else {
-        layer_off(3);
-        if (scroll_pressed && (TIMER_DIFF_16(record->event.time, scroll_pressed_time) < TAPPING_TERM)) {
-          tap_code16(LGUI(KC_BTN1));
-        }
-        scroll_pressed = false;
       }
       return false;
       break;
@@ -175,7 +156,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         lower_pressed = false;
         raise_pressed = false;
-        scroll_pressed = false;
       }
       break;
   }
