@@ -27,43 +27,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
 LCTL_T(KC_A) , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , RCTL_T(KC_SCLN),
 LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , RSFT_T(KC_SLSH),
-    KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),MO(1),GUI_T(KC_SPC),      ALT_T(KC_ENT),MO(2), _______  , _______  , _______  , KC_ESC
-    // KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),LT(1,KC_LNG2),GUI_T(KC_SPC), ALT_T(KC_ENT),LT(2,KC_LNG1), _______  , _______  , _______  , KC_ESC
+    KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),MO(1),GUI_T(KC_SPC),      ALT_T(KC_ENT),MO(2), XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_ESC
   ),
 
   [1] = LAYOUT_universal(
     KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                            KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,
-    KC_TAB   , _______  , _______  , _______  , _______  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , _______  ,
-    KC_LSFT  , _______  , _______  , _______  , _______  ,                            KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_RSFT  ,
-    _______  , _______  , _______  , _______  , _______  , KC_SPC   ,       KC_ENT ,  MO(5)    , _______  , _______  , _______  , _______
+LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , XXXXXXX  ,
+    KC_LSFT  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_RSFT  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,     _______  ,  MO(5)    , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______
   ),
 
   [2] = LAYOUT_universal(
     KC_EXLM  , KC_AT    , KC_HASH  , KC_DLR   , KC_PERC  ,                            KC_CIRC  , KC_AMPR  , KC_ASTR  , KC_LPRN  , KC_RPRN  ,
-    _______  , _______  , _______  , KC_QUOT  , KC_GRV   ,                            KC_MINS  , KC_EQL   , KC_LBRC  , KC_RBRC  , KC_BSLS  ,
-    _______  , _______  , _______  , KC_DQT   , KC_TILD  ,                            KC_UNDS  , KC_PLUS  , KC_LCBR  , KC_RCBR  , KC_PIPE  ,
-    _______  , _______  , _______  , KC_DEL   , MO(5)    , KC_SPC   ,      KC_ENT  ,  _______  , _______  , _______  , _______  , _______
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                            KC_MINS  , KC_EQL   , KC_LBRC  , KC_RBRC  , KC_BSLS  ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_DQT   , KC_TILD  ,                            KC_UNDS  , KC_PLUS  , KC_LCBR  , KC_RCBR  , KC_PIPE  ,
+    _______  , _______  , _______  , KC_DEL   , MO(5)    , _______  ,     _______  ,  _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______
   ),
 
   [3] = LAYOUT_universal(
-    RGB_TOG  , _______  , _______  , _______  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
+    RGB_TOG  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
     RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
     RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
-    QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , KBC_RST  , QK_BOOT
+    QK_BOOT  , KBC_RST  , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  ,      _______ ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , QK_BOOT
   ),
 
   [4] = LAYOUT_universal( // AUTO_MOUSE_DEFAULT_LAYER
-    _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  ,                            KC_BTN4  , KC_BTN1  ,LT(3,KC_BTN3), KC_BTN2  , KC_BTN5  ,
-    _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , _______  , _______
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_BTN4  , KC_BTN1  ,LT(3,KC_BTN3), KC_BTN2  , KC_BTN5  ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,      XXXXXXX ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
 
   [5] = LAYOUT_universal(
-    _______  , LCA(KC_E), LCA(KC_R), LCA(KC_T), _______  ,                            _______  , _______  , KC_MUTE  , KC_VOLD  , KC_VOLU  ,
-    _______  , LCA(KC_D), LCA(KC_F), LCA(KC_G), _______  ,                            LCA(KC_LEFT),LCA(KC_DOWN),LCA(KC_UP),LCA(KC_RIGHT), _______  ,
-    _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,    LCA(KC_ENT), _______  , _______  , _______  , _______  , _______
+    XXXXXXX  , LCA(KC_E), LCA(KC_R), LCA(KC_T), XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , KC_MUTE  , KC_VOLD  , KC_VOLU  ,
+    XXXXXXX  , LCA(KC_D), LCA(KC_F), LCA(KC_G), XXXXXXX  ,                            LCA(KC_LEFT),LCA(KC_DOWN),LCA(KC_UP),LCA(KC_RIGHT), XXXXXXX  ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  , _______  , _______  ,    LCA(KC_ENT), _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
 };
 // clang-format on
@@ -109,7 +108,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LCTL_T(KC_A):
         case LSFT_T(KC_Z):
-            return 120;
+            return 150;
         default:
             return TAPPING_TERM;
     }
