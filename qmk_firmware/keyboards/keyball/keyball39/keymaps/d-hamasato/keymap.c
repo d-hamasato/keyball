@@ -32,15 +32,15 @@ LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                      
 
   [1] = LAYOUT_universal(
     KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                            KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,
-LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , XXXXXXX  ,
+LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , KC_RCTL  ,
     KC_LSFT  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_HOME  , KC_PGDN  , KC_PGUP  , KC_END   , KC_RSFT  ,
     _______  , _______  , _______  , _______  , _______  , _______  ,     _______  ,  MO(5)    , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______
   ),
 
   [2] = LAYOUT_universal(
     KC_EXLM  , KC_AT    , KC_HASH  , KC_DLR   , KC_PERC  ,                            KC_CIRC  , KC_AMPR  , KC_ASTR  , KC_LPRN  , KC_RPRN  ,
-    XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                            KC_MINS  , KC_EQL   , KC_LBRC  , KC_RBRC  , KC_BSLS  ,
-    XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_DQT   , KC_TILD  ,                            KC_UNDS  , KC_PLUS  , KC_LCBR  , KC_RCBR  , KC_PIPE  ,
+LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                            KC_MINS  , KC_EQL   , KC_LBRC  , KC_RBRC  , KC_BSLS  ,
+    KC_LSFT  , XXXXXXX  , XXXXXXX  , KC_DQT   , KC_TILD  ,                            KC_UNDS  , KC_PLUS  , KC_LCBR  , KC_RCBR  , KC_PIPE  , // RSFT_T(KC_PIPE) ←これがバグなのか tapで バックスラッシュになってしまう。修正されたら切り替える
     _______  , _______  , _______  , KC_DEL   , MO(5)    , _______  ,     _______  ,  _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______
   ),
 
