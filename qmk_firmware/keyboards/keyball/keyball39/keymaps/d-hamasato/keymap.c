@@ -80,6 +80,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       case 0:
           set_auto_mouse_enable(true);
           keyball_set_scroll_mode(false);
+          rgblight_sethsv(HSV_OFF);
           break;
       case 3:
           // Auto enable scroll mode when the highest layer is 3
@@ -87,10 +88,17 @@ layer_state_t layer_state_set_user(layer_state_t state) {
           state = remove_auto_mouse_layer(state, false);
           set_auto_mouse_enable(false);
           keyball_set_scroll_mode(true);
+          rgblight_sethsv(HSV_PURPLE);
+          break;
+      case 6:
+          set_auto_mouse_enable(false);
+          keyball_set_scroll_mode(false);
+          rgblight_sethsv(HSV_RED);
           break;
       default:
           set_auto_mouse_enable(false);
           keyball_set_scroll_mode(false);
+          rgblight_sethsv(HSV_OFF);
           break;
     }
 
