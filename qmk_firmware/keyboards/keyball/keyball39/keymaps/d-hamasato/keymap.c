@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
 LCTL_T(KC_A) , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , RCTL_T(KC_SCLN),
 LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , RSFT_T(KC_SLSH),
-    KC_TAB   , TG(6)    , TG(3)    ,KC_BSPC   ,MO(1),GUI_T(KC_SPC),     ALT_T(KC_ENT),MO(2)    , XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_ESC
+    KC_TAB   ,RGUI_T(KC_LEFT),RALT_T(KC_RIGHT),KC_BSPC,MO(1),GUI_T(KC_SPC),  ALT_T(KC_ENT),MO(2),XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_ESC
   ),
 
   [1] = LAYOUT_universal(
@@ -70,7 +70,7 @@ LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                      
     RGB_TOG  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , KBC_RST ,
     RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , XXXXXXX  ,                            SCRL_DVI , CPI_I1K  , CPI_I100 , XXXXXXX  , XXXXXXX ,
     RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , XXXXXXX  ,                            SCRL_DVD , CPI_D1K  , CPI_D100 , XXXXXXX  , KBC_SAVE ,
-    QK_BOOT  , TG(6)    , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  ,      _______ ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , QK_BOOT
+    QK_BOOT  ,RGUI_T(KC_LEFT),RALT_T(KC_RIGHT),XXXXXXX,XXXXXXX, _______,   _______ ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , QK_BOOT
   ),
 };
 // clang-format on
@@ -124,7 +124,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LCTL_T(KC_A):
         case LSFT_T(KC_Z):
-            return 175;
+            return 150; // midSwitchに変えてから、175だと遅く感じたので150でしばらく様子見
         default:
             return TAPPING_TERM;
     }
@@ -133,15 +133,18 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 enum combos {
   TG_SCROLL_LAYER,
+  TG_SETTING_LAYER,
   COMBO_LENGTH
 };
 
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 const uint16_t PROGMEM scroll_combo[] = {KC_BTN1, KC_BTN2, COMBO_END};
+const uint16_t PROGMEM setting_combo[] = {RGUI_T(KC_LEFT), RALT_T(KC_RIGHT), COMBO_END};
 
 combo_t key_combos[] = {
   [TG_SCROLL_LAYER] = COMBO(scroll_combo, TG(3)),
+  [TG_SETTING_LAYER] = COMBO(setting_combo, TG(6)),
 };
 
 
