@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
 LCTL_T(KC_A) , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , RCTL_T(KC_SCLN),
 LSFT_T(KC_Z) , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , RSFT_T(KC_SLSH),
-    KC_TAB   , _______  , _______  ,LT(3,KC_BSPC),MO(1),GUI_T(KC_SPC),      ALT_T(KC_ENT),MO(2), XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_ESC
+    KC_TAB   , TG(6)    , TG(3)    ,KC_BSPC   ,MO(1),GUI_T(KC_SPC),     ALT_T(KC_ENT),MO(2)    , XXXXXXX  , XXXXXXX  , XXXXXXX  , KC_ESC
   ),
 
   [1] = LAYOUT_universal(
@@ -44,11 +44,11 @@ LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                      
     _______  , _______  , _______  , KC_DEL   , MO(5)    , _______  ,     _______  ,  _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______
   ),
 
-  [3] = LAYOUT_universal(
-    RGB_TOG  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
-    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
-    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
-    QK_BOOT  , KBC_RST  , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  ,      _______ ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , QK_BOOT
+  [3] = LAYOUT_universal( // scroll layer
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX ,
+    _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX ,
+    XXXXXXX  , XXXXXXX  , TG(3)    , XXXXXXX  , XXXXXXX  , _______  ,      _______ ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
 
   [4] = LAYOUT_universal( // AUTO_MOUSE_DEFAULT_LAYER
@@ -58,11 +58,19 @@ LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                      
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,      XXXXXXX ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
 
-  [5] = LAYOUT_universal(
+  [5] = LAYOUT_universal( // device control layer
+
     XXXXXXX  , LCA(KC_E), LCA(KC_R), LCA(KC_T), XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , KC_MUTE  , KC_VOLD  , KC_VOLU  ,
     XXXXXXX  , LCA(KC_D), LCA(KC_F), LCA(KC_G), XXXXXXX  ,                            LCA(KC_LEFT),LCA(KC_DOWN),LCA(KC_UP),LCA(KC_RIGHT), XXXXXXX  ,
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
     XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  , _______  , _______  ,    LCA(KC_ENT), _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX
+  ),
+
+  [6] = LAYOUT_universal( // setting layer
+    RGB_TOG  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , KBC_RST ,
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , XXXXXXX  ,                            SCRL_DVI , CPI_I1K  , CPI_I100 , XXXXXXX  , XXXXXXX ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , XXXXXXX  ,                            SCRL_DVD , CPI_D1K  , CPI_D100 , XXXXXXX  , KBC_SAVE ,
+    QK_BOOT  , TG(6)    , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  ,      _______ ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , QK_BOOT
   ),
 };
 // clang-format on
