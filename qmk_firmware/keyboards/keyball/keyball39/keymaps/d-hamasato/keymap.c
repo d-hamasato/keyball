@@ -53,7 +53,7 @@ LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                      
 
   [4] = LAYOUT_universal( // AUTO_MOUSE_DEFAULT_LAYER
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
-    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_BTN4  , KC_BTN1  ,LT(3,KC_BTN3), KC_BTN2  , KC_BTN5  ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_BTN4  , KC_BTN1  , MO(3)    , KC_BTN2  , KC_BTN5  ,
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,      XXXXXXX ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
@@ -120,6 +120,9 @@ static bool raise_pressed = false;
 static uint16_t lower_pressed_time = 0;
 static uint16_t raise_pressed_time = 0;
 
+static bool mo3_pressed = false;
+static uint16_t mo3_pressed_time = 0;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // HOLD_ON_OTHER_KEY_PRESSオプションと LT()の組み合わせだとたまに意図しない入力になったので、シングルタップで入力言語切り替えになるようMO()をオーバーライド
@@ -151,10 +154,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    // AUTO_MOUSE_DEFAULT_LAYER 内で LT(3,KC_BTN3) としたところ、レイヤー切り替えは動作するも KD_BTN3 が動作しなかったため MO(3)をオーバーライド
+    case MO(3):
+      if (record->event.pressed) {
+        mo3_pressed = true;
+        mo3_pressed_time = record->event.time;
+        layer_on(3);
+      } else {
+        layer_off(3);
+        if (mo3_pressed && (TIMER_DIFF_16(record->event.time, mo3_pressed_time) < TAPPING_TERM)) {
+          tap_code(KC_BTN3);
+        }
+        mo3_pressed = false;
+      }
+      return false;
+      break;
     default:
       if (record->event.pressed) {
         lower_pressed = false;
         raise_pressed = false;
+        mo3_pressed   = false;
       }
       break;
   }
