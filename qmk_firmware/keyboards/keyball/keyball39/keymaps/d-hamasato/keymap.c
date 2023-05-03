@@ -46,7 +46,7 @@ LCTL_T(KC_TAB),XXXXXXX  , XXXXXXX  , KC_QUOT  , KC_GRV   ,                      
 
   [3] = LAYOUT_universal( // scroll layer
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX ,
-    _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX ,
+    _______  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , KC_BTN1  , XXXXXXX  , KC_BTN2  , XXXXXXX ,
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX ,
     XXXXXXX  , XXXXXXX  , TG(3)    , XXXXXXX  , XXXXXXX  , _______  ,      _______ ,  XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX
   ),
@@ -129,6 +129,20 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM;
     }
 }
+
+
+enum combos {
+  TG_SCROLL_LAYER,
+  COMBO_LENGTH
+};
+
+uint16_t COMBO_LEN = COMBO_LENGTH;
+
+const uint16_t PROGMEM scroll_combo[] = {KC_BTN1, KC_BTN2, COMBO_END};
+
+combo_t key_combos[] = {
+  [TG_SCROLL_LAYER] = COMBO(scroll_combo, TG(3)),
+};
 
 
 static bool lower_pressed = false;
