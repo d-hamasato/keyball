@@ -206,3 +206,11 @@ void oledkit_render_info_user(void) {
     keyball_oled_render_ballinfo();
 }
 #endif
+
+void caps_word_set_user(bool active) {
+    if (active) {
+        rgblight_sethsv(HSV_WHITE);
+    } else {
+        rgblight_sethsv(HSV_OFF);
+    }
+}
